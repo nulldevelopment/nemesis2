@@ -9,12 +9,15 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Class GenerateTestsCommand.
  */
 class GenerateTestsCommand extends Command
 {
+    use ContainerAwareTrait;
+
     public function configure()
     {
         $this
@@ -38,10 +41,11 @@ class GenerateTestsCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $settings = $this->container->get('settings');
+
         $sourcePath  = $input->getArgument('path');
         $packageType = $input->getArgument('type');
 
-        $settings = new PackageSettings();
         $settings->setPath($sourcePath);
         $settings->setType($packageType);
         $settings->addExcludeFolders('Tests');
