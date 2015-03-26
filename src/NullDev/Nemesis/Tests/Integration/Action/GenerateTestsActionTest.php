@@ -33,6 +33,7 @@ class GenerateTestsActionTest extends \PHPUnit_Framework_TestCase
     public function testRunAction()
     {
         $packageSettings = new PackageSettings();
+        $packageSettings->setPath(NEMESIS_TESTDATA_PATH);
 
         $result = $this->object->runAction($packageSettings);
 

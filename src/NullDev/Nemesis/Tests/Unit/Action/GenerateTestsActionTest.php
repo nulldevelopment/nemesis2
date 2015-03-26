@@ -21,7 +21,14 @@ class GenerateTestsActionTest extends \PHPUnit_Framework_TestCase
 
         //
         $mockPackageSettings = m::mock('NullDev\Nemesis\Settings\PackageSettings');
-        $result              = $obj->runAction($mockPackageSettings);
+
+        $mockGen
+            ->shouldReceive('generate')
+            ->with($mockPackageSettings)
+            ->once()
+            ->andReturn([]);
+
+        $result = $obj->runAction($mockPackageSettings);
 
         $this->assertEquals($mockResultCollection, $result);
     }
