@@ -13,11 +13,12 @@ class GenerateTestsActionSpec extends ObjectBehavior
     }
 
     /**
-     * @param NullDev\Nemesis\Collection\ActionResultCollection $resultCollection
+     * @param NullDev\Nemesis\Collection\ActionResultCollection            $resultCollection
+     * @param NullDev\Nemesis\SourceMeta\SourceMetaDataCollectionGenerator $sourceGen
      */
-    public function let($resultCollection)
+    public function let($resultCollection, $sourceGen)
     {
-        $this->beConstructedWith($resultCollection);
+        $this->beConstructedWith($resultCollection, $sourceGen);
     }
 
     /**

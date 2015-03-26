@@ -6,6 +6,15 @@ services:
         class:     NullDev\Nemesis\Settings\PackageSettings
         arguments: ["%mailer.transport%"]
 
+    nemesis.action.generate_tests:
+        class:     NullDev\Nemesis\Action\GenerateTestsAction
+        arguments:
+            resultCollection: "@nemesis.actionresult.collection"
+            sourceGen: "@nemesis.sourcemeta_collection.generator"
+
+    nemesis.actionresult.collection:
+        class:     NullDev\Nemesis\Collection\ActionResultCollection
+
     nemesis.sourcefile.generator:
         class:     NullDev\Nemesis\SourceFile\SourceFileListGenerator
         arguments:

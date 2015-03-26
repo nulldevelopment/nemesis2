@@ -32,9 +32,17 @@ class GenerateTestsCommandTest extends \PHPUnit_Framework_TestCase
         $mockPackageSettings
             ->shouldReceive('addExcludeFolders')->with('Tests')->once();
 
+        $mockAction = m::mock();
+        $mockAction
+            ->shouldReceive('runAction')
+            ->with($mockPackageSettings)
+            ->once();
+
         $mockContainer = m::mock('Symfony\Component\DependencyInjection\ContainerInterface');
         $mockContainer
             ->shouldReceive('get')->with('settings')->once()->andReturn($mockPackageSettings);
+        $mockContainer
+            ->shouldReceive('get')->with('nemesis.action.generate_tests')->once()->andReturn($mockAction);
 
         $command = new GenerateTestsCommand('name');
         $command->setContainer($mockContainer);

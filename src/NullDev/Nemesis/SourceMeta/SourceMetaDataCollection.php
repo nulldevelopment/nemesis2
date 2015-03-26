@@ -5,6 +5,9 @@ namespace NullDev\Nemesis\SourceMeta;
 use Doctrine\Common\Collections\ArrayCollection;
 use NullDev\Nemesis\SourceMeta\SourceMetaData;
 
+/**
+ * Class SourceMetaDataCollection.
+ */
 class SourceMetaDataCollection extends ArrayCollection
 {
     /**
