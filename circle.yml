@@ -3,7 +3,7 @@ machine:
     version: 5.5.11
 dependencies:
   pre:
-    - sudo composer self-update --no-interaction
+#    - sudo composer self-update --no-interaction
   cache_directories:
     - "bin"
     - "vendor"
