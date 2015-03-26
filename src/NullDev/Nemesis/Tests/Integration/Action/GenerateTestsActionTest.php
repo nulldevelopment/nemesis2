@@ -4,12 +4,15 @@ namespace NullDev\Nemesis\Tests\Integration\Action;
 use NullDev\Nemesis\Action\GenerateTestsAction;
 use NullDev\Nemesis\Collection\ActionResultCollection;
 use NullDev\Nemesis\Settings\PackageSettings;
+use NullDev\Nemesis\Tests\Integration\ContainerTrait;
 
 /**
  *
  */
 class GenerateTestsActionTest extends \PHPUnit_Framework_TestCase
 {
+    use ContainerTrait;
+
     /**
      * @var GenerateTestsAction
      */
@@ -21,9 +24,7 @@ class GenerateTestsActionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->resultCollection = new ActionResultCollection();
-
-        $this->object = new GenerateTestsAction($this->resultCollection);
+        $this->object = $this->getContainer()->get('nemesis.action.generate_tests');
     }
 
     /**
@@ -35,6 +36,6 @@ class GenerateTestsActionTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->object->runAction($packageSettings);
 
-        $this->assertEquals($this->resultCollection, $result);
+        $this->assertInstanceOf('NullDev\Nemesis\Collection\ActionResultCollection', $result);
     }
 }

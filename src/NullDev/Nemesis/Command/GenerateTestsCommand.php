@@ -52,9 +52,7 @@ class GenerateTestsCommand extends Command
         $settings->setType($packageType);
         $settings->addExcludeFolders('Tests');
 
-        $collection = new ActionResultCollection();
-
-        $action = new GenerateTestsAction($collection);
+        $action = $this->container->get('nemesis.action.generate_tests');
         $action->runAction($settings);
 
         $output->writeln($sourcePath);
