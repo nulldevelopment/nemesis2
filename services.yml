@@ -1,0 +1,7 @@
+parameters:
+    mailer.transport: sendmail
+
+services:
+    settings:
+        class:     NullDev\Nemesis\Settings\PackageSettings
+        arguments: ["%mailer.transport%"]
