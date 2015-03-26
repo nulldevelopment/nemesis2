@@ -10,6 +10,8 @@ class PackageSettings
     protected $path;
     protected $type;
 
+    protected $excludeFolders = [];
+
     /**
      * @return string
      */
@@ -40,5 +42,37 @@ class PackageSettings
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExcludeFolders()
+    {
+        return $this->excludeFolders;
+    }
+
+    /**
+     * @param array $excludeFolders
+     *
+     * @return $this
+     */
+    public function setExcludeFolders($excludeFolders)
+    {
+        $this->excludeFolders = $excludeFolders;
+
+        return $this;
+    }
+
+    /**
+     * @param string $excludeFolder
+     *
+     * @return $this
+     */
+    public function addExcludeFolders($excludeFolder)
+    {
+        $this->excludeFolders[] = $excludeFolder;
+
+        return $this;
     }
 }

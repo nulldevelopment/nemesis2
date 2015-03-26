@@ -44,6 +44,7 @@ class GenerateTestsCommand extends Command
         $settings = new PackageSettings();
         $settings->setPath($sourcePath);
         $settings->setType($packageType);
+        $settings->addExcludeFolders('Tests');
 
         $collection = new ActionResultCollection();
 

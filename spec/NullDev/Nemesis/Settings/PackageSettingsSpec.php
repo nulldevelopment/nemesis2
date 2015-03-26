@@ -29,4 +29,21 @@ class PackageSettingsSpec extends ObjectBehavior
         $this->setType('sf2');
         $this->getType()->shouldReturn('sf2');
     }
+
+    public function it_should_support_list_of_folders_to_exclude()
+    {
+        $this->setExcludeFolders(['folder']);
+        $this->getExcludeFolders()->shouldReturn(['folder']);
+    }
+
+    public function it_should_have_nothing_in_the_list_of_default_folders_to_exclude()
+    {
+        $this->getExcludeFolders()->shouldReturn([]);
+    }
+
+    public function it_should_support_addition_of_folders_to_exclude()
+    {
+        $this->addExcludeFolders('folder');
+        $this->getExcludeFolders()->shouldReturn(['folder']);
+    }
 }
