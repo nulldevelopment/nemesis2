@@ -5,3 +5,46 @@ services:
     settings:
         class:     NullDev\Nemesis\Settings\PackageSettings
         arguments: ["%mailer.transport%"]
+
+    nemesis.sourcefile.generator:
+        class:     NullDev\Nemesis\SourceFile\SourceFileListGenerator
+        arguments:
+            factory: "@symfony.finder"
+
+    nemesis.sourcemeta.factory:
+        class:     NullDev\Nemesis\SourceMeta\SourceMetaDataFactory
+
+    nemesis.sourcemeta.generator:
+        class:     NullDev\Nemesis\SourceMeta\SourceMetaDataGenerator
+        arguments:
+            factory: "@nemesis.sourcemeta.factory"
+            fileParser: "@examiner.fileparser.php"
+            fileLoader: "@examiner.fileloader.php"
+            reflectionGenerator: "@examiner.generator.reflection"
+
+    nemesis.sourcemeta_collection.factory:
+        class:     NullDev\Nemesis\SourceMeta\SourceMetaDataCollectionFactory
+
+    nemesis.sourcemeta_collection.generator:
+        class:     NullDev\Nemesis\SourceMeta\SourceMetaDataCollectionGenerator
+        arguments:
+            factory: "@nemesis.sourcemeta_collection.factory"
+            fileListGen: "@nemesis.sourcefile.generator"
+            sourceMetaDataGenerator: "@nemesis.sourcemeta.generator"
+
+    examiner.fileparser.php_result_factory:
+        class:     NullDev\Examiner\FileParser\PhpFileParseResultFactory
+
+    examiner.fileparser.php:
+        class:     NullDev\Examiner\FileParser\PhpFileParser
+        arguments:
+            factory: "@examiner.fileparser.php_result_factory"
+
+    examiner.fileloader.php:
+        class:     NullDev\Examiner\PhpFileLoader
+
+    examiner.generator.reflection:
+        class:     NullDev\Examiner\ReflectionClassGenerator
+
+    symfony.finder:
+        class:     Symfony\Component\Finder\Finder

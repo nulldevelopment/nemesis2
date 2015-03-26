@@ -3,13 +3,14 @@ namespace NullDev\Nemesis\Tests\Integration\SourceFile;
 
 use NullDev\Nemesis\Settings\PackageSettings;
 use NullDev\Nemesis\SourceFile\SourceFileListGenerator;
-use Symfony\Component\Finder\Finder;
+use NullDev\Nemesis\Tests\Integration\ContainerTrait;
 
 /**
  *
  */
 class SourceFileListGeneratorTest extends \PHPUnit_Framework_TestCase
 {
+    use ContainerTrait;
     /**
      * @var SourceFileListGenerator
      */
@@ -19,9 +20,7 @@ class SourceFileListGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $fileFinder = new Finder();
-
-        $this->object = new SourceFileListGenerator($fileFinder);
+        $this->object = $this->getContainer()->get('nemesis.sourcefile.generator');
     }
 
     /**

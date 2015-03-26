@@ -2,7 +2,6 @@
 namespace NullDev\Nemesis\Tests\Integration\SourceMeta;
 
 use NullDev\Nemesis\SourceMeta\SourceMetaDataCollection;
-use stdClass;
 
 /**
  *

@@ -1,18 +1,16 @@
 <?php
 namespace NullDev\Nemesis\Tests\Integration\SourceMeta;
 
-use NullDev\Examiner\FileParser\PhpFileParseResultFactory;
 use NullDev\Nemesis\SourceMeta\SourceMetaDataGenerator;
-use NullDev\Nemesis\SourceMeta\SourceMetaDataFactory;
-use NullDev\Examiner\FileParser\PhpFileParser;
-use NullDev\Examiner\PhpFileLoader;
-use NullDev\Examiner\ReflectionClassGenerator;
+use NullDev\Nemesis\Tests\Integration\ContainerTrait;
 
 /**
  *
  */
 class SourceMetaDataGeneratorTest extends \PHPUnit_Framework_TestCase
 {
+    use ContainerTrait;
+
     /**
      * @var SourceMetaDataGenerator
      */
@@ -22,12 +20,7 @@ class SourceMetaDataGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $factory             = new SourceMetaDataFactory();
-        $fileParser          = new PhpFileParser(new PhpFileParseResultFactory());
-        $fileLoader          = new PhpFileLoader();
-        $reflectionGenerator = new ReflectionClassGenerator();
-
-        $this->object = new SourceMetaDataGenerator($factory, $fileParser, $fileLoader, $reflectionGenerator);
+        $this->object = $this->getContainer()->get('nemesis.sourcemeta.generator');
     }
 
     /**
@@ -35,6 +28,8 @@ class SourceMetaDataGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerate()
     {
-        $this->markTestIncomplete('TODO');
+        $result = $this->object->generate(NEMESIS_TESTDATA_PATH.'/Phone/FeaturePhone/Nokia3320.php');
+
+        $this->assertInstanceOf('NullDev\Nemesis\SourceMeta\SourceMetaData', $result);
     }
 }
