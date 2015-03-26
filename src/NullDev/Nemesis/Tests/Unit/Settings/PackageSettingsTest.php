@@ -20,6 +20,7 @@ class PackageSettingsTest extends \PHPUnit_Framework_TestCase
     {
         $this->object = new PackageSettings();
     }
+
     /**
      * Auto generated get method using TeeGee.
      */
@@ -27,6 +28,7 @@ class PackageSettingsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(null, $this->object->getPath());
     }
+
     /**
      * Auto generated set method using TeeGee.
      */
@@ -44,6 +46,7 @@ class PackageSettingsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(null, $this->object->getType());
     }
+
     /**
      * Auto generated set method using TeeGee.
      */
@@ -52,5 +55,33 @@ class PackageSettingsTest extends \PHPUnit_Framework_TestCase
         $type = 'type';
         $this->object->setType($type);
         $this->assertEquals($type, $this->object->getType());
+    }
+
+    /**
+     * Auto generated get method using TeeGee.
+     */
+    public function testGetExcludeFolders()
+    {
+        $this->assertEquals([], $this->object->getExcludeFolders());
+    }
+
+    /**
+     * Auto generated set method using TeeGee.
+     */
+    public function testSetExcludeFolders()
+    {
+        $excludeFolders = 'excludeFolders';
+        $this->object->setExcludeFolders($excludeFolders);
+        $this->assertEquals($excludeFolders, $this->object->getExcludeFolders());
+    }
+
+    /**
+     *
+     */
+    public function testAddExcludeFolders()
+    {
+        $this->object->addExcludeFolders('folder');
+
+        $this->assertEquals(['folder'], $this->object->getExcludeFolders());
     }
 }
