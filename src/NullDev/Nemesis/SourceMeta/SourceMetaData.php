@@ -2,6 +2,9 @@
 
 namespace NullDev\Nemesis\SourceMeta;
 
+/**
+ * Class SourceMetaData.
+ */
 class SourceMetaData
 {
     protected $filePath;

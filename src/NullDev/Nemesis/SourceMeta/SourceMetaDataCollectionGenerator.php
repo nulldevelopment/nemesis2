@@ -8,6 +8,9 @@ use NullDev\Nemesis\SourceMeta\SourceMetaDataGenerator;
 use NullDev\Nemesis\SourceFile\SourceFileListGenerator;
 use NullDev\Nemesis\SourceMeta\SourceMetaData;
 
+/**
+ * Class SourceMetaDataCollectionGenerator.
+ */
 class SourceMetaDataCollectionGenerator
 {
     protected $factory;
@@ -15,6 +18,11 @@ class SourceMetaDataCollectionGenerator
 
     protected $sourceMetaDataGenerator;
 
+    /**
+     * @param SourceMetaDataCollectionFactory $factory
+     * @param SourceFileListGenerator         $fileListGen
+     * @param SourceMetaDataGenerator         $sourceMetaDataGenerator
+     */
     public function __construct(
         SourceMetaDataCollectionFactory $factory,
         SourceFileListGenerator $fileListGen,

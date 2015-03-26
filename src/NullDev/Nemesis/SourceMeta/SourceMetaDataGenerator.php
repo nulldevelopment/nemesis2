@@ -7,6 +7,9 @@ use NullDev\Examiner\FileParser\PhpFileParser;
 use NullDev\Examiner\PhpFileLoader;
 use NullDev\Examiner\ReflectionClassGenerator;
 
+/**
+ * Class SourceMetaDataGenerator.
+ */
 class SourceMetaDataGenerator
 {
     protected $factory;
@@ -14,6 +17,12 @@ class SourceMetaDataGenerator
     protected $fileLoader;
     protected $reflectionGenerator;
 
+    /**
+     * @param SourceMetaDataFactory    $factory
+     * @param PhpFileParser            $fileParser
+     * @param PhpFileLoader            $fileLoader
+     * @param ReflectionClassGenerator $reflectionGenerator
+     */
     public function __construct(
         SourceMetaDataFactory $factory,
         PhpFileParser $fileParser,
