@@ -28,10 +28,12 @@ class GenerateTestsAction
      *
      * @return ActionResultCollection
      *
-     * @SuppressWarnings("UnusedFormalParameter")
+     * @SuppressWarnings("Unused")
      */
     public function runAction(PackageSettings $packageSettings)
     {
+        $sourceCollection = $this->sourceGen->generate($packageSettings);
+
         return $this->resultCollection;
     }
 }
