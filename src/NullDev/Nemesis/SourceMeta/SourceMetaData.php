@@ -107,4 +107,31 @@ class SourceMetaData
 
         return true;
     }
+
+    /**
+     * @return int
+     */
+    public function getGettersSettersPercentage()
+    {
+        $totalMethodCount       = 0;
+        $gettersAndSettersCount = 0;
+
+        foreach ($this->getReflection()->getMethods() as $method) {
+            if ($method->isPublic() && !$method->isConstructor()) {
+                $totalMethodCount++;
+
+                $methodPrefix = substr($method->getName(), 0, 3);
+                
+                if (in_array($methodPrefix, ['get', 'set'])) {
+                    $gettersAndSettersCount++;
+                }
+            }
+        }
+
+        if ($totalMethodCount > 0) {
+            return (int) (100 * ($gettersAndSettersCount / $totalMethodCount));
+        } else {
+            return 0;
+        }
+    }
 }

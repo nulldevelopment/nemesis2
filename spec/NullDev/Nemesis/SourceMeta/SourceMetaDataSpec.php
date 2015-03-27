@@ -111,4 +111,16 @@ class SourceMetaDataSpec extends ObjectBehavior
 
         $this->hasConstructorParams()->shouldReturn(true);
     }
+
+    /**
+     * @param \ReflectionClass $reflection
+     */
+    public function it_should_calculate_getters_and_setters_percentage($reflection)
+    {
+        $reflection->getMethods()->willReturn([]);
+
+        $this->setReflection($reflection);
+
+        $this->getGettersSettersPercentage()->shouldReturn(0);
+    }
 }
