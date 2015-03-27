@@ -39,4 +39,76 @@ class SourceMetaDataSpec extends ObjectBehavior
         $this->setReflection($reflection);
         $this->getReflection()->shouldReturn($reflection);
     }
+
+    /**
+     * @param \ReflectionClass  $reflection
+     * @param \ReflectionMethod $reflectionConstructor
+     */
+    public function it_should_return_constructor_reflection($reflection, $reflectionConstructor)
+    {
+        $reflectionConstructor->isConstructor()->willReturn(true);
+
+        $reflection->getMethods()->willReturn([$reflectionConstructor]);
+
+        $this->setReflection($reflection);
+        $this->getConstructorReflection()->shouldReturnAnInstanceOf('ReflectionMethod');
+    }
+
+    /**
+     * @param \ReflectionClass  $reflection
+     * @param \ReflectionMethod $reflectionMethod
+     */
+    public function it_should_return_null_if_no_constructor($reflection, $reflectionMethod)
+    {
+        $reflectionMethod->isConstructor()->willReturn(false);
+
+        $reflection->getMethods()->willReturn([$reflectionMethod]);
+
+        $this->setReflection($reflection);
+        $this->getConstructorReflection()->shouldReturn(null);
+    }
+
+    /**
+     * @param \ReflectionClass $reflection
+     */
+    public function it_should_return_false_if_no_constructor_defined($reflection)
+    {
+        $reflection->getMethods()->willReturn([]);
+
+        $this->setReflection($reflection);
+
+        $this->hasConstructorParams()->shouldReturn(false);
+    }
+
+    /**
+     * @param \ReflectionClass  $reflection
+     * @param \ReflectionMethod $reflectionMethod
+     */
+    public function it_should_return_false_if_no_arguments_in_constructor_defined($reflection, $reflectionMethod)
+    {
+        $reflectionMethod->isConstructor()->willReturn(true);
+        $reflectionMethod->getParameters()->willReturn([]);
+
+        $reflection->getMethods()->willReturn([$reflectionMethod]);
+
+        $this->setReflection($reflection);
+
+        $this->hasConstructorParams()->shouldReturn(false);
+    }
+
+    /**
+     * @param \ReflectionClass  $reflection
+     * @param \ReflectionMethod $reflectionMethod
+     */
+    public function it_should_return_true_if_constructor_has_arguments_defined($reflection, $reflectionMethod)
+    {
+        $reflectionMethod->isConstructor()->willReturn(true);
+        $reflectionMethod->getParameters()->willReturn(['param1', 'param2']);
+
+        $reflection->getMethods()->willReturn([$reflectionMethod]);
+
+        $this->setReflection($reflection);
+
+        $this->hasConstructorParams()->shouldReturn(true);
+    }
 }

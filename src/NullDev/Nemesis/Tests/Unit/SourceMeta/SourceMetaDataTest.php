@@ -20,6 +20,7 @@ class SourceMetaDataTest extends \PHPUnit_Framework_TestCase
     {
         $this->object = new SourceMetaData();
     }
+
     /**
      * Auto generated get method using TeeGee.
      */
@@ -27,6 +28,7 @@ class SourceMetaDataTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(null, $this->object->getFilePath());
     }
+
     /**
      * Auto generated set method using TeeGee.
      */
@@ -44,6 +46,7 @@ class SourceMetaDataTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(null, $this->object->getClassName());
     }
+
     /**
      * Auto generated set method using TeeGee.
      */
@@ -61,6 +64,7 @@ class SourceMetaDataTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(null, $this->object->getFullyQualifiedClassName());
     }
+
     /**
      * Auto generated set method using TeeGee.
      */
@@ -78,6 +82,7 @@ class SourceMetaDataTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(null, $this->object->getReflection());
     }
+
     /**
      * Auto generated set method using TeeGee.
      */
@@ -86,5 +91,94 @@ class SourceMetaDataTest extends \PHPUnit_Framework_TestCase
         $reflection = m::mock('ReflectionClass');
         $this->object->setReflection($reflection);
         $this->assertEquals($reflection, $this->object->getReflection());
+    }
+
+    /**
+     */
+    public function testGetConstructorReflection()
+    {
+        $mockConstructor = m::mock('ReflectionMethod');
+        $mockReflection  = m::mock('ReflectionClass');
+
+        $mockReflection->shouldReceive('getMethods')->once()->andReturn([$mockConstructor]);
+
+        $mockConstructor->shouldReceive('isConstructor')->once()->andReturn(true);
+
+        $this->object->setReflection($mockReflection);
+
+        $result = $this->object->getConstructorReflection();
+
+        $this->assertEquals($mockConstructor, $result);
+    }
+
+    /**
+     */
+    public function testGetConstructorReflectionNoConstructorFound()
+    {
+        $mockMethod1    = m::mock('ReflectionMethod');
+        $mockReflection = m::mock('ReflectionClass');
+
+        $mockReflection->shouldReceive('getMethods')->once()->andReturn([$mockMethod1]);
+
+        $mockMethod1->shouldReceive('isConstructor')->once()->andReturn(false);
+
+        $this->object->setReflection($mockReflection);
+
+        $result = $this->object->getConstructorReflection();
+
+        $this->assertNull($result);
+    }
+
+    /**
+     */
+    public function testHasConstructorParams()
+    {
+        $mockConstructor = m::mock('ReflectionMethod');
+        $mockReflection  = m::mock('ReflectionClass');
+
+        $mockReflection->shouldReceive('getMethods')->once()->andReturn([$mockConstructor]);
+
+        $mockConstructor->shouldReceive('isConstructor')->once()->andReturn(true);
+        $mockConstructor->shouldReceive('getParameters')->once()->andReturn(['param1']);
+
+        $this->object->setReflection($mockReflection);
+
+        $result = $this->object->hasConstructorParams();
+
+        $this->assertTrue($result);
+    }
+
+    /**
+     */
+    public function testHasConstructorParamsNoConstructor()
+    {
+        $mockReflection = m::mock('ReflectionClass');
+
+        $mockReflection->shouldReceive('getMethods')->once()->andReturn([]);
+
+        $this->object->setReflection($mockReflection);
+
+        $result = $this->object->hasConstructorParams();
+
+        $this->assertFalse($result);
+    }
+
+    /**
+     */
+    public function testHasConstructorParamsNoParamsIn()
+    {
+        $mockConstructor = m::mock('ReflectionMethod');
+        $mockReflection  = m::mock('ReflectionClass');
+
+        $mockReflection->shouldReceive('getMethods')->once()->andReturn([$mockConstructor]);
+
+        $mockConstructor->shouldReceive('isConstructor')->once()->andReturn(true);
+        $mockConstructor->shouldReceive('getParameters')->once()->andReturn([]);
+
+        $this->object->setReflection($mockReflection);
+
+        $result = $this->object->hasConstructorParams();
+
+        $this->assertFalse($result);
     }
 }

@@ -75,4 +75,36 @@ class SourceMetaData
     {
         $this->reflection = $reflection;
     }
+
+    /**
+     * @return \ReflectionMethod|null
+     */
+    public function getConstructorReflection()
+    {
+        foreach ($this->getReflection()->getMethods() as $method) {
+            if ($method->isConstructor()) {
+                return $method;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasConstructorParams()
+    {
+        $constructor = $this->getConstructorReflection();
+
+        if (null === $constructor) {
+            return false;
+        }
+
+        if (count($constructor->getParameters()) === 0) {
+            return false;
+        }
+
+        return true;
+    }
 }
