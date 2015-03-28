@@ -1,6 +1,7 @@
 <?php
 namespace NullDev\Nemesis\Tests\Integration\SourceMeta;
 
+use NullDev\Nemesis\SourceMeta\SourceMetaData;
 use NullDev\Nemesis\SourceMeta\SourceMetaDataCollection;
 
 /**
@@ -27,6 +28,12 @@ class SourceMetaDataCollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('TODO');
+        $this->assertEquals(0, $this->getCount());
+
+        $item = new SourceMetaData();
+
+        $this->object->add($item);
+
+        $this->assertEquals(1, $this->getCount());
     }
 }
