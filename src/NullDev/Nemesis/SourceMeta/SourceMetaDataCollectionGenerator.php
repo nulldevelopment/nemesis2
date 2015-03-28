@@ -48,6 +48,8 @@ class SourceMetaDataCollectionGenerator
             $sourceMeta = $this->sourceMetaDataGenerator->generate($filePath);
 
             if ($sourceMeta instanceof SourceMetaData) {
+                //@todo remove this into SourceMetaDataGenerator!
+                $sourceMeta->setPackageSettings($settings);
                 $collection->add($sourceMeta);
             }
         }

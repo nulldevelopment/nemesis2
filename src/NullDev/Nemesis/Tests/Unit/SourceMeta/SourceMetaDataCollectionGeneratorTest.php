@@ -61,6 +61,9 @@ class SourceMetaDataCollectionGeneratorTest extends \PHPUnit_Framework_TestCase
         $mockSettings
             ->shouldReceive('getSourceCode->getExcludeFolders')->once()->andReturn(['excluded-folder-1']);
 
+        $mockSourceMeta
+            ->shouldReceive('setPackageSettings')->with($mockSettings)->once();
+
         $mockCollection
             ->shouldReceive('add')
             ->with($mockSourceMeta)
