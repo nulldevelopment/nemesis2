@@ -41,6 +41,15 @@ class SourceMetaDataSpec extends ObjectBehavior
     }
 
     /**
+     * @param NullDev\Nemesis\Settings\PackageSettings $packageSettings
+     */
+    public function it_should_have_package_settings($packageSettings)
+    {
+        $this->setPackageSettings($packageSettings);
+        $this->getPackageSettings()->shouldReturn($packageSettings);
+    }
+
+    /**
      * @param \ReflectionClass  $reflection
      * @param \ReflectionMethod $reflectionConstructor
      */

@@ -2,6 +2,8 @@
 
 namespace NullDev\Nemesis\SourceMeta;
 
+use NullDev\Nemesis\Settings\PackageSettings;
+
 /**
  * Class SourceMetaData.
  */
@@ -11,6 +13,7 @@ class SourceMetaData
     protected $className;
     protected $fullyQualifiedClassName;
     protected $reflection;
+    protected $packageSettings;
 
     /**
      * @return mixed
@@ -77,6 +80,22 @@ class SourceMetaData
     }
 
     /**
+     * @return mixed
+     */
+    public function getPackageSettings()
+    {
+        return $this->packageSettings;
+    }
+
+    /**
+     * @param mixed $packageSettings
+     */
+    public function setPackageSettings(PackageSettings $packageSettings)
+    {
+        $this->packageSettings = $packageSettings;
+    }
+
+    /**
      * @return \ReflectionMethod|null
      */
     public function getConstructorReflection()
@@ -121,7 +140,7 @@ class SourceMetaData
                 $totalMethodCount++;
 
                 $methodPrefix = substr($method->getName(), 0, 3);
-                
+
                 if (in_array($methodPrefix, ['get', 'set'])) {
                     $gettersAndSettersCount++;
                 }
