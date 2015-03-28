@@ -15,7 +15,8 @@ class GenerateTestsAction
     protected $sourceGen;
 
     /**
-     * @param ActionResultCollection $resultCollection
+     * @param ActionResultCollection            $resultCollection
+     * @param SourceMetaDataCollectionGenerator $sourceGen
      */
     public function __construct(ActionResultCollection $resultCollection, SourceMetaDataCollectionGenerator $sourceGen)
     {
