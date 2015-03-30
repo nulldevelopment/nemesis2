@@ -12,26 +12,6 @@ class SourceMetaDataCollectionGeneratorTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function te1stGenerate()
-    {
-        $this->markTestIncomplete('TODO');
-
-        $mockFactory                 = m::mock('NullDev\Nemesis\SourceMeta\SourceMetaDataCollectionFactory');
-        $mockFileListGen             = m::mock('NullDev\Nemesis\SourceFile\SourceFileListGenerator');
-        $mockSourceMetaDataGenerator = m::mock('NullDev\Nemesis\SourceMeta\SourceMetaDataGenerator');
-
-        $obj = new SourceMetaDataCollectionGenerator($mockFactory, $mockFileListGen, $mockSourceMetaDataGenerator);
-
-        //
-        $mockSettings = m::mock('NullDev\Nemesis\Settings\PackageSettings');
-        $result       = $obj->generate($mockSettings);
-
-        $this->assertNotNull($result);
-    }
-
-    /**
-     *
-     */
     public function testGenerate()
     {
         $mockFactory                 = m::mock('NullDev\Nemesis\SourceMeta\SourceMetaDataCollectionFactory');
