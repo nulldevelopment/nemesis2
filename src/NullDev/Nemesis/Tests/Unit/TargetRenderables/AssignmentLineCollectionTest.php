@@ -48,7 +48,7 @@ class AssignmentLineCollectionTest extends \PHPUnit_Framework_TestCase
 
         $mockAssignmentLine1->shouldReceive('render')->once()->andReturn('line');
         $mockAssignmentLine2->shouldReceive('render')->once()->andReturn('another-line');
-        $mockAssignmentLine1->shouldReceive('getDestinationAlignment')->once()->andReturn(2);
+        $mockAssignmentLine1->shouldReceive('getDestinationAlignment')->twice()->andReturn(2);
         $mockAssignmentLine2->shouldReceive('getDestinationAlignment')->once()->andReturn(2);
         $mockAssignmentLine1->shouldReceive('setDestinationAlignment')->with(2)->once();
         $mockAssignmentLine2->shouldReceive('setDestinationAlignment')->with(2)->once();
