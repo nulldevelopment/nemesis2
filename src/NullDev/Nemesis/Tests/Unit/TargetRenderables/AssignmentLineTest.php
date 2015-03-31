@@ -73,8 +73,8 @@ class AssignmentLineTest extends \PHPUnit_Framework_TestCase
         $mockSimple   = m::mock();
         $mockStdClass = m::mock();
 
-        $mockSimple->shouldReceive('__toString')->once()->andReturn('$mockSimple()');
-        $mockStdClass->shouldReceive('__toString')->once()->andReturn('$mockStdClass("stdClass")');
+        $mockSimple->shouldReceive('__toString')->andReturn('$mockSimple()');
+        $mockStdClass->shouldReceive('__toString')->andReturn('$mockStdClass("stdClass")');
 
         return [
             [

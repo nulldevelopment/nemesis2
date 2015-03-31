@@ -28,7 +28,7 @@ class SourceMetaDataGeneratorTest extends \PHPUnit_Framework_TestCase
         $mockParseResult
             ->shouldReceive('getClassName')->once()->andReturn('SomeClass');
         $mockParseResult
-            ->shouldReceive('getFullyQualifiedClassName')->once()->andReturn($fqdn);
+            ->shouldReceive('getFullyQualifiedClassName')->times(3)->andReturn($fqdn);
 
         $mockMetaData = m::mock();
 
